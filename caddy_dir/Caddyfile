@@ -1,0 +1,79 @@
+# Frontend on 8001
+# Editor tools on 8002
+# Beta Frontend on 8003
+# Beta Editor tools on 8004
+# Ghost on 8005
+
+thegazelle.org {
+	log  /var/log/access1.log
+	redir / https://www.thegazelle.org{uri}
+}
+
+www.thegazelle.org {
+	log  /var/log/access2.log
+	proxy / localhost:8001 {
+		max_fails 0
+	}
+}
+
+admin.thegazelle.org {
+	log /var/log/access3.log
+	proxy / localhost:8002 {
+		max_fails 0
+	}
+}
+
+beta.thegazelle.org {
+        log  /var/log/access4.log
+        proxy / localhost:8003 {
+		max_fails 0
+	}
+	errors {
+		500 /home/gazelle/gazelle-beta/http-error-static-pages/build/500.html
+		501 /home/gazelle/gazelle-beta/http-error-static-pages/build/501.html
+		502 /home/gazelle/gazelle-beta/http-error-static-pages/build/502.html
+		503 /home/gazelle/gazelle-beta/http-error-static-pages/build/503.html
+		504 /home/gazelle/gazelle-beta/http-error-static-pages/build/504.html
+		505 /home/gazelle/gazelle-beta/http-error-static-pages/build/505.html
+		506 /home/gazelle/gazelle-beta/http-error-static-pages/build/506.html
+		507 /home/gazelle/gazelle-beta/http-error-static-pages/build/507.html
+		508 /home/gazelle/gazelle-beta/http-error-static-pages/build/508.html
+		509 /home/gazelle/gazelle-beta/http-error-static-pages/build/509.html
+		510 /home/gazelle/gazelle-beta/http-error-static-pages/build/510.html
+		511 /home/gazelle/gazelle-beta/http-error-static-pages/build/511.html
+	}
+}
+
+adminbeta.thegazelle.org {
+	log /var/log/access5.log
+	proxy / localhost:8004 {
+		max_fails 0
+	}
+	errors {
+		500 /home/gazelle/gazelle-beta/http-error-static-pages/build/500.html
+		501 /home/gazelle/gazelle-beta/http-error-static-pages/build/501.html
+		502 /home/gazelle/gazelle-beta/http-error-static-pages/build/502.html
+		503 /home/gazelle/gazelle-beta/http-error-static-pages/build/503.html
+		504 /home/gazelle/gazelle-beta/http-error-static-pages/build/504.html
+		505 /home/gazelle/gazelle-beta/http-error-static-pages/build/505.html
+		506 /home/gazelle/gazelle-beta/http-error-static-pages/build/506.html
+		507 /home/gazelle/gazelle-beta/http-error-static-pages/build/507.html
+		508 /home/gazelle/gazelle-beta/http-error-static-pages/build/508.html
+		509 /home/gazelle/gazelle-beta/http-error-static-pages/build/509.html
+		510 /home/gazelle/gazelle-beta/http-error-static-pages/build/510.html
+		511 /home/gazelle/gazelle-beta/http-error-static-pages/build/511.html
+	}
+}
+
+editor.thegazelle.org/ {
+	log  /var/log/access6.log
+	redir /ghost
+}
+
+editor.thegazelle.org/ghost {
+	log  /var/log/access7.log
+	proxy / localhost:8005/ghost {
+		max_fails 0
+	}
+}
+
