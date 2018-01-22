@@ -7,7 +7,7 @@ staging.thegazelle.org {
     rotate_age 7
     rotate_keep 1
   }
-  proxy / localhost:8003
+  proxy / localhost:8001
   errors {
     500 ~/server/http-error-static-pages/build/500.html
     501 ~/server/http-error-static-pages/build/501.html
@@ -30,7 +30,7 @@ staging.admin.thegazelle.org {
     rotate_age 7
     rotate_keep 1
   }
-  proxy / localhost:8004
+  proxy / localhost:8002
   errors {
     500 ~/server/http-error-static-pages/build/500.html
     501 ~/server/http-error-static-pages/build/501.html
