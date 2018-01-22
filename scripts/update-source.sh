@@ -1,13 +1,5 @@
 #!/bin/bash
 
-# Go to the main repo
-cd "$HOME/server"
-if [ $? -ne 0 ]
-then
-  echo "couldn't find folder" >&2
-  exit 1
-fi
-
 # Tell Slack that we're starting deployment
 if [ "$GAZELLE_ENV" == "staging" ]
 then
@@ -23,12 +15,37 @@ if [ $? -ne 0 ]
     exit 1
 fi
 
+# Go to the main repo
+cd "$HOME/server"
+if [ $? -ne 0 ]
+then
+  echo "couldn't find folder" >&2
+  node "$HOME/slack-deployment-bot/index.js" "Deploying $GAZELLE_ENV failed: Couldn't cd into main repo"
+  exit 1
+fi
+
+# Checkout relevant branch
+if [ "$GAZELLE_ENV" == "staging" ]
+then
+  git checkout master
+fi
+if [ "$GAZELLE_ENV" == "production" ]
+then
+  git checkout stable
+fi
+if [ $? -ne 0 ]
+then
+  echo "Git checkout failed" >&2
+  node "$HOME/slack-deployment-bot/index.js" "Deploying $GAZELLE_ENV failed: couldn't git checkout the branch"
+  exit 1
+fi
+
 # Pull the latest source
 git pull
 if [ $? -ne 0 ]
 then
   echo "Git pull failed" >&2
-  node "$HOME/slack-deployment-bot/index.js" "Deployment failed during git pull"
+  node "$HOME/slack-deployment-bot/index.js" "Deploying $GAZELLE_ENV failed: couldn't pull new source"
   exit 1
 fi
 
@@ -37,7 +54,15 @@ npm install
 if [ $? -ne 0 ]
 then
   echo "npm install failed" >&2
-  node "$HOME/slack-deployment-bot/index.js" "Deployment failed during npm install"
+  node "$HOME/slack-deployment-bot/index.js" "Deploying $GAZELLE_ENV failed: couldn't install new dependencies"
+  exit 1
+fi
+
+# Make sure nothing changed
+if [ "$(git diff)" != "" ]
+then
+  echo "source changed during update" >&2
+  node "$HOME/slack-deployment-bot/index.js" "Deploying $GAZELLE_ENV failed: source changed during update"
   exit 1
 fi
 
@@ -53,7 +78,7 @@ fi
 if [ $? -ne 0 ]
 then
   echo "build failed" >&2
-  node "$HOME/slack-deployment-bot/index.js" "Deployment failed during build"
+  node "$HOME/slack-deployment-bot/index.js" "Deploying $GAZELLE_ENV failed: couldn't build source"
   exit 1
 fi
 
@@ -62,7 +87,7 @@ forever restart server
 if [ $? -ne 0 ]
 then
   echo "server restart failed" >&2
-  node "$HOME/slack-deployment-bot/index.js" "Deployment failed during server restart"
+  node "$HOME/slack-deployment-bot/index.js" "Deploying $GAZELLE_ENV failed: couldn't restart server"
   exit 1
 fi
 
