@@ -1,31 +1,5 @@
 # Frontend on 8001
-# Editor tools on 8002
-# Beta Frontend on 8003
-# Beta Editor tools on 8004
-# Ghost on 8005
-
-thegazelle.org {
-  log  /var/log/thegazelle.org.log
-  redir / https://www.thegazelle.org{uri}
-}
-
-www.thegazelle.org {
-  log  /var/log/www.thegazelle.org.log {
-    rotate_size 10
-    rotate_age 7
-    rotate_keep 1
-  }
-  proxy / localhost:8001
-}
-
-admin.thegazelle.org {
-  log /var/log/admin.thegazelle.org.log {
-    rotate_size 10
-    rotate_age 7
-    rotate_keep 1
-  }
-  proxy / localhost:8002
-}
+# Admin interface on 8002
 
 staging.thegazelle.org {
   log  /var/log/staging.thegazelle.org.log {
@@ -57,38 +31,6 @@ staging.admin.thegazelle.org {
     rotate_keep 1
   }
   proxy / localhost:8004
-  errors {
-    500 ~/server/http-error-static-pages/build/500.html
-    501 ~/server/http-error-static-pages/build/501.html
-    502 ~/server/http-error-static-pages/build/502.html
-    503 ~/server/http-error-static-pages/build/503.html
-    504 ~/server/http-error-static-pages/build/504.html
-    505 ~/server/http-error-static-pages/build/505.html
-    506 ~/server/http-error-static-pages/build/506.html
-    507 ~/server/http-error-static-pages/build/507.html
-    508 ~/server/http-error-static-pages/build/508.html
-    509 ~/server/http-error-static-pages/build/509.html
-    510 ~/server/http-error-static-pages/build/510.html
-    511 ~/server/http-error-static-pages/build/511.html
-  }
-}
-
-editor.thegazelle.org/ {
-  log  /var/log/editor.thegazelle.org.log {
-    rotate_size 10
-    rotate_age 7
-    rotate_keep 1
-  }
-  redir /ghost
-}
-
-editor.thegazelle.org/ghost {
-  log  /var/log/ghost.log {
-    rotate_size 10
-    rotate_age 7
-    rotate_keep 1
-  }
-  proxy / localhost:8005/ghost
   errors {
     500 ~/server/http-error-static-pages/build/500.html
     501 ~/server/http-error-static-pages/build/501.html
