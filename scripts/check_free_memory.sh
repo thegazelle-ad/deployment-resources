@@ -10,5 +10,5 @@ then
   ALERT_MESSAGE="The ${GAZELLE_ENV} server only has ${MEMORY_FREE}MB free in main memory.
 The top consuming processes are:
 ${TOP_MEMORY_CONSUMING_PROCESSES}"
-  node ~/slack-deployment-bot/index.js "$ALERT_MESSAGE"
+  node "$SLACK_DEPLOYMENT_BOT_DIRECTORY/index.js" error-logging "$ALERT_MESSAGE"
 fi;
