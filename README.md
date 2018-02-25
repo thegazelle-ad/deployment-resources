@@ -19,6 +19,8 @@ export DEPLOYMENT_RESOURCES_DIRECTORY=~/path/to/deployment-resources
 export SERVER_DIRECTORY=~/path/to/server
 # Replace ENVIRONMENT with "staging" if it's the staging server or "production" for the production server
 export GAZELLE_ENV=ENVIRONMENT
+# This is literal, it works on it's own as long as it's placed below the nvm code in your .bashrc
+export NODE_PATH=$(which node)
 ```
 
 > NOTE: It is important that you don't add trailing forward slashes to your paths as it is assumed there aren't any
