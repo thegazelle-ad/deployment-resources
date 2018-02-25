@@ -4,10 +4,6 @@ IS_NUM_REGEX="^[0-9]+$"
 
 if ! [[ $# -eq 2 && $2 =~ $IS_NUM_REGEX ]];
 then
-  echo $IS_NUM_REGEX
-  echo $1
-  echo $2
-  echo $#
   echo "Incorrect usage"
   echo "Correct usage: node ./check_free_memory.sh <slack_channel_to_post_to> <memory_limit_to_check>"
   exit 1
