@@ -3,11 +3,11 @@
 # Tell Slack that we're starting deployment
 if [ "$GAZELLE_ENV" == "staging" ]
 then
-  node "$SLACK_DEPLOYMENT_BOT_DIRECTORY/index.js" "Starting deployment to staging.thegazelle.org, and staging.admin.thegazelle.org"
+  $NODE_PATH "$SLACK_DEPLOYMENT_BOT_DIRECTORY/index.js" "Starting deployment to staging.thegazelle.org, and staging.admin.thegazelle.org"
 fi
 if [ "$GAZELLE_ENV" == "production" ]
 then
-  node "$SLACK_DEPLOYMENT_BOT_DIRECTORY/index.js" "Starting deployment to www.thegazelle.org, and admin.thegazelle.org"
+  $NODE_PATH "$SLACK_DEPLOYMENT_BOT_DIRECTORY/index.js" "Starting deployment to www.thegazelle.org, and admin.thegazelle.org"
 fi
 if [ $? -ne 0 ]
   then
@@ -20,7 +20,7 @@ cd "$HOME/server"
 if [ $? -ne 0 ]
 then
   echo "couldn't find folder" >&2
-  node "$SLACK_DEPLOYMENT_BOT_DIRECTORY/index.js" "Deploying $GAZELLE_ENV failed: Couldn't cd into main repo"
+  $NODE_PATH "$SLACK_DEPLOYMENT_BOT_DIRECTORY/index.js" "Deploying $GAZELLE_ENV failed: Couldn't cd into main repo"
   exit 1
 fi
 
@@ -36,7 +36,7 @@ fi
 if [ $? -ne 0 ]
 then
   echo "Git checkout failed" >&2
-  node "$SLACK_DEPLOYMENT_BOT_DIRECTORY/index.js" "Deploying $GAZELLE_ENV failed: couldn't git checkout the branch"
+  $NODE_PATH "$SLACK_DEPLOYMENT_BOT_DIRECTORY/index.js" "Deploying $GAZELLE_ENV failed: couldn't git checkout the branch"
   exit 1
 fi
 
@@ -45,7 +45,7 @@ git pull
 if [ $? -ne 0 ]
 then
   echo "Git pull failed" >&2
-  node "$SLACK_DEPLOYMENT_BOT_DIRECTORY/index.js" "Deploying $GAZELLE_ENV failed: couldn't pull new source"
+  $NODE_PATH "$SLACK_DEPLOYMENT_BOT_DIRECTORY/index.js" "Deploying $GAZELLE_ENV failed: couldn't pull new source"
   exit 1
 fi
 
@@ -54,7 +54,7 @@ npm install
 if [ $? -ne 0 ]
 then
   echo "npm install failed" >&2
-  node "$SLACK_DEPLOYMENT_BOT_DIRECTORY/index.js" "Deploying $GAZELLE_ENV failed: couldn't install new dependencies"
+  $NODE_PATH "$SLACK_DEPLOYMENT_BOT_DIRECTORY/index.js" "Deploying $GAZELLE_ENV failed: couldn't install new dependencies"
   exit 1
 fi
 
@@ -62,7 +62,7 @@ fi
 if [ "$(git diff)" != "" ]
 then
   echo "source changed during update" >&2
-  node "$SLACK_DEPLOYMENT_BOT_DIRECTORY/index.js" "Deploying $GAZELLE_ENV failed: source changed during update"
+  $NODE_PATH "$SLACK_DEPLOYMENT_BOT_DIRECTORY/index.js" "Deploying $GAZELLE_ENV failed: source changed during update"
   exit 1
 fi
 
@@ -78,7 +78,7 @@ fi
 if [ $? -ne 0 ]
 then
   echo "build failed" >&2
-  node "$SLACK_DEPLOYMENT_BOT_DIRECTORY/index.js" "Deploying $GAZELLE_ENV failed: couldn't build source"
+  $NODE_PATH "$SLACK_DEPLOYMENT_BOT_DIRECTORY/index.js" "Deploying $GAZELLE_ENV failed: couldn't build source"
   exit 1
 fi
 
@@ -87,7 +87,7 @@ forever restart server
 if [ $? -ne 0 ]
 then
   echo "server restart failed" >&2
-  node "$SLACK_DEPLOYMENT_BOT_DIRECTORY/index.js" "Deploying $GAZELLE_ENV failed: couldn't restart server"
+  $NODE_PATH "$SLACK_DEPLOYMENT_BOT_DIRECTORY/index.js" "Deploying $GAZELLE_ENV failed: couldn't restart server"
   exit 1
 fi
 
@@ -95,11 +95,11 @@ fi
 cd ..
 if [ "$GAZELLE_ENV" == "staging" ]
 then
-  node "$SLACK_DEPLOYMENT_BOT_DIRECTORY/index.js" "staging.thegazelle.org and staging.admin.thegazelle.org were deployed successfully!"
+  $NODE_PATH "$SLACK_DEPLOYMENT_BOT_DIRECTORY/index.js" "staging.thegazelle.org and staging.admin.thegazelle.org were deployed successfully!"
 fi
 if [ "$GAZELLE_ENV" == "production" ]
 then
-  node "$SLACK_DEPLOYMENT_BOT_DIRECTORY/index.js" "www.thegazelle.org and admin.thegazelle.org were deployed successfully!"
+  $NODE_PATH "$SLACK_DEPLOYMENT_BOT_DIRECTORY/index.js" "www.thegazelle.org and admin.thegazelle.org were deployed successfully!"
 fi
 if [ $? -ne 0 ]
   then
