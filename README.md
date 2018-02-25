@@ -67,7 +67,7 @@ And remember to change the `/path/to/server` to your actual path to the reposito
 Very similarly to above, we setup a cron job, as long as you have setup the environment variables as described at the top it should be as easy as adding the following to your crontab
 
 ```
-* * * * * . .bashrc && /path/to/server/deployment-resources/scripts/check_free_memory.sh error-logging 400
+* * * * * /bin/bash -ic "/path/to/server/deployment-resources/scripts/check_free_memory.sh error-logging 400"
 ```
 
 Where you can replace `error-logging` (the channel to post to) and `400` (the memory limit to check for) with whatever values suit you, but those are our current ones as this README is being written.
