@@ -1,0 +1,23 @@
+{
+  "name": "gazelle-deployment-resources",
+  "version": "1.0.0",
+  "description": "The repo to apply source control to the resources we purely use for deployment",
+  "main": "N/A",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thegazelle-ad/deployment-resources.git"
+  },
+  "author": "Emil Goldsmith Olesen <emil.goldsmith@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thegazelle-ad/deployment-resources/issues"
+  },
+  "homepage": "https://github.com/thegazelle-ad/deployment-resources#readme",
+  "dependencies": {
+    "google-auth-library": "^0.12.0",
+    "googleapis": "^26.0.1"
+  }
+}
