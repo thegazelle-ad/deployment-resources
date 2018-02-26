@@ -20,7 +20,7 @@ then
   ALERT_MESSAGE="The ${GAZELLE_ENV} server only has ${MEMORY_FREE}MB free in main memory.
 The top consuming processes are:
 ${TOP_MEMORY_CONSUMING_PROCESSES}"
-  $NODE_PATH "$SLACK_DEPLOYMENT_BOT_DIRECTORY/index.js" "$SLACK_CHANNEL" "$ALERT_MESSAGE"
+  node "$SLACK_DEPLOYMENT_BOT_DIRECTORY/index.js" "$SLACK_CHANNEL" "$ALERT_MESSAGE"
   if [[ $? -ne 0 ]];
   then
     echo "Slack Deployment Bot failed"
