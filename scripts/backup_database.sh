@@ -8,7 +8,7 @@ if [ $? -ne 0 ]
 then
   ERROR_MESSAGE="Creating database dump failed"
   echo $ERROR_MESSAGE >&2
-  node "$SLACK_DEPLOYMENT_BOT_DIRECTORY/index.js" error-logging $ERROR_MESSAGE
+  node "$SLACK_DEPLOYMENT_BOT_DIRECTORY/index.js" error-logging "$ERROR_MESSAGE"
   exit 1
 fi
 
@@ -19,7 +19,7 @@ if [ $? -ne 0 ]
 then
   ERROR_MESSAGE="Uploading database dump failed"
   echo $ERROR_MESSAGE >&2
-  node "$SLACK_DEPLOYMENT_BOT_DIRECTORY/index.js" error-logging $ERROR_MESSAGE
+  node "$SLACK_DEPLOYMENT_BOT_DIRECTORY/index.js" error-logging "$ERROR_MESSAGE"
   exit 1
 fi
 
@@ -29,7 +29,7 @@ if [ $? -ne 0 ]
 then
   ERROR_MESSAGE="Removing database dump file failed"
   echo $ERROR_MESSAGE >&2
-  node "$SLACK_DEPLOYMENT_BOT_DIRECTORY/index.js" error-logging $ERROR_MESSAGE
+  node "$SLACK_DEPLOYMENT_BOT_DIRECTORY/index.js" error-logging "$ERROR_MESSAGE"
   exit 1
 fi
 
