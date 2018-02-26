@@ -18,6 +18,6 @@
   "homepage": "https://github.com/thegazelle-ad/deployment-resources#readme",
   "dependencies": {
     "google-auth-library": "^0.12.0",
-    "googleapis": "^26.0.1"
+    "googleapis": "^12.4.0"
   }
 }

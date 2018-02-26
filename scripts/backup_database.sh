@@ -2,7 +2,7 @@
 
 DIRECTIVE=$(dirname $0)
 
-mysqldump -u $DATABASE_USER -p$DATABASE_PASSWORD $DATABASE_NAME > $DIRECTIVE/helpers/temp.dump
+mysqldump -u "$DATABASE_USER" -p"$DATABASE_PASSWORD" "$DATABASE_NAME" > "$DIRECTIVE"/helpers/temp.dump
 
 if [ $? -ne 0 ]
 then
