@@ -21,6 +21,7 @@ export DEPLOYMENT_RESOURCES_DIRECTORY=~/path/to/deployment-resources
 export SERVER_DIRECTORY=~/path/to/server
 # Replace ENVIRONMENT with "staging" if it's the staging server or "production" for the production server
 export GAZELLE_ENV=ENVIRONMENT
+### The database ones below are only necessary for making database backups which if you're on staging you probably don't need
 # The value of this is probably root
 export DATABASE_USER=<user_name>
 export DATABASE_PASSWORD=<password>
