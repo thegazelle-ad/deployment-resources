@@ -35,6 +35,8 @@ If you're doing all the setup of a server in one go, remember to restart your ba
 
 ## Setup automatic database backups
 
+> NOTE: This is of course only necessary on one server if using 2 different ones for staging and production
+
 To backup the database, a script has been written that will automatically dump the database and upload it to the "Timestamped Ghost Dumps" folder in the [Gazelle Engineering Google Drive](https://drive.google.com/drive/u/1/folders/0B5ceCeOuBd1tVWNSX2k2RVUtOFk). To set it up, you first have to get the credentials that give you the rights to programatically access the drive. This is very simple as you just run
 
 `./scripts/getGoogleApiOAuthToken.sh`
