@@ -56,6 +56,8 @@ Below all the comments you can now add in the line
 
 `0 2 * * Thu /bin/bash -ic '/path/to/deployment-resources/scripts/backup_database.sh'`
 
+> NOTE: The reason that we use `/bin/bash -ic` is so that we start an interactive shell that loads in `.bashrc` and other environment variables that cron doesn't do by default
+
 And Cron should be setup to update your database every Thursday morning at 2 AM. Remember to check it actually does this. You can also test it by temporarily setting the time fields to `* * * * *` to have it backup once a minute for temporary testing.
 And remember to change the `/path/to/deployment-resources` to your actual path to the repository.
 
