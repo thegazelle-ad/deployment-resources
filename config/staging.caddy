@@ -24,8 +24,8 @@ staging.thegazelle.org {
   }
 }
 
-staging.admin.thegazelle.org {
-  log /var/log/staging.admin.thegazelle.org.log {
+staging-admin.thegazelle.org {
+  log /var/log/staging-admin.thegazelle.org.log {
     rotate_size 10
     rotate_age 7
     rotate_keep 1
