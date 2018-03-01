@@ -47,9 +47,11 @@ then
 
   TOP_MEMORY_CONSUMING_PROCESSES=$(ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head)
   # Newlines here are on purpose for formatting
-  ALERT_MESSAGE="The ${GAZELLE_ENV} server only has ${MEMORY_FREE}MB free in main memory.
+  ALERT_MESSAGE="*The ${GAZELLE_ENV} server only has ${MEMORY_FREE}MB free in main memory.*
+
 The top consuming processes are:
-${TOP_MEMORY_CONSUMING_PROCESSES}"
+
+>>> ${TOP_MEMORY_CONSUMING_PROCESSES}"
   # Notify Slack channel
   node "$SLACK_DEPLOYMENT_BOT_DIRECTORY/index.js" "$SLACK_CHANNEL" "$ALERT_MESSAGE"
   if [[ $? -ne 0 ]];
