@@ -45,7 +45,7 @@ then
   # Log that we have notified the channel at the current limit at the current time
   echo "$CURRENT_TIME $MEMORY_FREE" > "$NOTIFICATION_LOG_PATH"
 
-  TOP_MEMORY_CONSUMING_PROCESSES=$(ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head)
+  TOP_MEMORY_CONSUMING_PROCESSES=$(ps -eo pid,ppid,cmd:5000,%mem,%cpu --sort=-%mem | head)
   # Newlines here are on purpose for formatting
   ALERT_MESSAGE="*The ${GAZELLE_ENV} server only has ${MEMORY_FREE}MB free in main memory.*
 
