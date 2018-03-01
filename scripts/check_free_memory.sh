@@ -14,7 +14,7 @@ fi
 SLACK_CHANNEL=$1
 MEMORY_LIMIT=$2
 
-MEMORY_FREE=$(free -m | grep Mem | awk '{print $4}')
+MEMORY_FREE=$(free -m | grep Mem | awk '{print $7}')
 
 if [[ "$MEMORY_FREE" -le "$MEMORY_LIMIT" ]];
 then
