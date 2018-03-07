@@ -31,10 +31,10 @@ then
     if [[ $((CURRENT_TIME - NOTIFICATION_TIME)) -gt "$TEN_MINUTES" ]];
     then
       rm "$NOTIFICATION_LOG_PATH"
-    # If memory free in last notification was more than it is now we want to notify again
+    # If memory free in last notification was more than 50MB more than it is now we want to notify again
     # else we exit now as there is nothing new to tell
     else
-      if [[ "$MEMORY_FREE" -ge "$NOTIFICATION_MEMORY_FREE" ]];
+      if [[ $((MEMORY_FREE + 50)) -ge "$NOTIFICATION_MEMORY_FREE" ]];
       then
         # Exit gracefully
         exit 0
