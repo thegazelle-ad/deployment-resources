@@ -66,7 +66,18 @@ And remember to change the `/path/to/deployment-resources` to your actual path t
 Very similarly to above, we setup a cron job, as long as you have setup the environment variables as described at the top it should be as easy as adding the following to your crontab
 
 ```
-* * * * * /bin/bash -ic "/path/to/server/deployment-resources/scripts/check_free_memory.sh error-logging 250"
+* * * * * /bin/bash -ic "/path/to/deployment-resources/scripts/check_free_memory.sh error-logging 250"
 ```
 
 Where you can replace `error-logging` (the channel to post to) and `250` (the memory limit to check for) with whatever values suit you, but those are our current ones as this README is being written.
+
+## Setup health monitoring
+
+Very similarly to above, we setup a cron job, as long as you have setup the environment variables as described at the top it should be as easy as adding the following to your crontab
+
+```
+* * * * * /bin/bash -ic "/path/to/deployment-resources/scripts/check_server_health.sh error-logging"
+```
+
+Where you can replace `error-logging` (the channel to post to) with whatever value suits you, but those are our current ones as this README is being written.
+
