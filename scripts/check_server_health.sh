@@ -24,3 +24,19 @@ then
     exit 1
   fi
 fi
+
+curl -f http://localhost:8001 -m 5 &> /dev/null
+
+if [[ $? -ne 0 ]];
+then
+  # Server is down
+  forever restartall
+
+  # Notify Slack channel
+  node "$SLACK_DEPLOYMENT_BOT_DIRECTORY/index.js" "$SLACK_CHANNEL" "The $GAZELLE_ENV server stopped responding and was restarted"
+  if [[ $? -ne 0 ]];
+  then
+    echo "Slack Deployment Bot failed"
+    exit 1
+  fi
+fi
